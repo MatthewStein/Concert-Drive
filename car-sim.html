@@ -35,6 +35,21 @@
 
       <div class="jumbotron">
         <h1>Jumbotron heading</h1>
+        
+        
+        <!-- Google Map API Key AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU -->
+        <script type="text/javascript" src="jquery.js"></script>
+        <script src="http://maps.google.com/maps?file=api&v=2&sensor=true&key=AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU" type="text/javascript"></script>
+        <script type="text/javascript" src="gps.jquery.js"></script>
+        <script type="text/javascript">
+            $("#map").googleMap().load();
+        </script>
+        <div id="directions"></div>
+        <div id="map"></div>
+        <input type="text" id="start" />
+        <input type="text" id="end" />
+        <input type="submit" id="getdirections" value="Get Directions!" />
+          
         <p class="lead">Cras justo odio, dapibus ac facilisis in, egestas eget quam. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
         <p><a class="btn btn-lg btn-success" href="#" role="button">Sign up today</a></p>
       </div>
@@ -71,11 +86,9 @@
 
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
- 
+    <script src="js/ie10-viewport-bug-workaround.js"></script> 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-      
+    <script src="js/bootstrap.min.js"></script>      
     <script src="js/index.js"></script>
     <script src="js/locationPrefs.js"></script>
 
