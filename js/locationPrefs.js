@@ -1,24 +1,21 @@
 $(document).ready(function(){
     
+var event_queue = [];
+var current_country = "US";
+    
 // STEP 1: GET UPCOMING EVENTS NEAR CURRENT LOCATION
     
-    // To-do:
-    // - update availableEvents each time location changes
-    // - figure out optimal radius, based on city?
-    
-var location = "Berlin,Germany"; // can also use lat,lon
-var radius = 5;
-
-var availableEvents = [];
-    
-$.getJSON("http://api.bandsintown.com/events/search.json?location=" + location + "&radius=" + radius + "&callback=?&app_id=concert_drive",
+function repopulateEvents(location, radius) {
+    $.getJSON("http://api.bandsintown.com/events/search.json?location="+location+"&radius="+radius+"&callback=?&app_id=concert_drive",
     function(data){
         data.forEach( function(event) {
             if (event.ticket_status !== "unavailable") {
-                availableEvents.push(event);
+                event_queue.push(event);
             }
         });
-});
+        //console.log(data[0].artists[0].name);
+    });
+};
 
 // Structure for JSON from Bandsintown:
 //
@@ -28,7 +25,7 @@ $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location +
 //  "datetime": "2012-08-15T18:00:00",
 //  "ticket_url": "http://www.bandsintown.com/event/5010001/buy_tickets",
 //  "artists": [{
-//    "name": "Skrillex",
+//     "name": "Skrillex",
 //     "url": "http://www.bandsintown.com/Skrillex",
 //     "mbid": "ae002c5d-aac6-490b-a39a-30aa9e2edf2b"
 //  }],
@@ -54,7 +51,34 @@ $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location +
     // - get top songs for each artist from Spotify API
     // - add snippets of songs to media player queue
     
+function generatePlaylist(events, previews) {
+    // First - get native Spotify artist info for events in queue
+    var artists = [];
+    events.forEach(function(event) {
+        var name = event.artists[0].name.replace(/\s/g,'+');
+        
+        $.getJSON("https://api.spotify.com/v1/search?q="+name+"&type=artist&callback=?",
+            function(data){
+                var artist = data.artists.items[0];
+                var artist_info = [artist.name, artist.id, artist.genres];
+                artists.push(artist_info);
+        });
+    });
     
+    // Second - get top hits for those artists
+    artists.forEach(function(curr_artist) {
+        $.getJSON("https://api.spotify.com/v1/artists/"+curr_artist+"/top-tracks?country="+current_country+"&callback=?", 
+            function(data){
+                var song_preview = data.tracks[0].preview_url;
+                previews.push(song_preview);
+        });
+    });
+
+};
+
+//var lotsaMusic = generatePlaylist(repopulateEvents("Berlin,Germany",5,[]), []);
+//console.log(lotsaMusic);
+
 // STEP 3: ACCEPT AND INTERPRET USER FEEDBACK
     
     // To-do:
@@ -66,5 +90,3 @@ $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location +
     //      - stop playing song
     //      - rember genre/artist negatively in music preferences
     // - if we run out of songs, rerun query with larger radius? or date more in future?
-    
-});
