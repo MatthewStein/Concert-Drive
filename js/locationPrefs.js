@@ -13,7 +13,7 @@ function repopulateEvents(location, radius) {
                 event_queue.push(event);
             }
         });
-        //console.log(data[0].artists[0].name);
+        console.log(JSON.stringify(event_queue));
     });
 };
 
@@ -51,33 +51,24 @@ function repopulateEvents(location, radius) {
     // - get top songs for each artist from Spotify API
     // - add snippets of songs to media player queue
     
-function generatePlaylist(events, previews) {
-    // First - get native Spotify artist info for events in queue
-    var artists = [];
-    events.forEach(function(event) {
+function generatePlaylist() {
+    event_queue.forEach(function(event) {
         var name = event.artists[0].name.replace(/\s/g,'+');
-        
+        console.log(name);
         $.getJSON("https://api.spotify.com/v1/search?q="+name+"&type=artist&callback=?",
             function(data){
                 var artist = data.artists.items[0];
                 var artist_info = [artist.name, artist.id, artist.genres];
-                artists.push(artist_info);
+                event.info = artist_info;
+                
+                $.getJSON("https://api.spotify.com/v1/artists/"+artist.name+"/top-tracks?country="+current_country+"&callback=?", 
+                    function(data){
+                        var song_preview = data.tracks[0].preview_url;
+                        event.song_url = song_preview;
+                });
         });
     });
-    
-    // Second - get top hits for those artists
-    artists.forEach(function(curr_artist) {
-        $.getJSON("https://api.spotify.com/v1/artists/"+curr_artist+"/top-tracks?country="+current_country+"&callback=?", 
-            function(data){
-                var song_preview = data.tracks[0].preview_url;
-                previews.push(song_preview);
-        });
-    });
-
 };
-
-//var lotsaMusic = generatePlaylist(repopulateEvents("Berlin,Germany",5,[]), []);
-//console.log(lotsaMusic);
 
 // STEP 3: ACCEPT AND INTERPRET USER FEEDBACK
     
@@ -90,3 +81,4 @@ function generatePlaylist(events, previews) {
     //      - stop playing song
     //      - rember genre/artist negatively in music preferences
     // - if we run out of songs, rerun query with larger radius? or date more in future?
+});
