@@ -1,9 +1,12 @@
+$(document).ready(function(){
+    
 var location = "Berlin,Germany"; // can also use lat,lon
 var radius = 5;
 
+var availableEvents = [];
+    
 $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location + "&radius=" + radius + "&callback=?&app_id=concert_drive",
     function(data){
-        var availableEvents = [];
         data.forEach( function(event) {
             if (event.ticket_status !== "unavailable") {
                 availableEvents.push(event);
@@ -11,7 +14,7 @@ $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location +
         });
 });
 
-// Structure for JSON from Bands in Town:
+// Structure for JSON from Bandsintown:
 //
 //[{
 //  "id": "5010001",
@@ -37,3 +40,5 @@ $.getJSON("http://api.bandsintown.com/events/search.json?location=" + location +
 //  "ticket_status": "available",
 //  "on_sale_datetime": "2012-02-27T09:00:00"
 //}]
+    
+});
