@@ -1,68 +1,67 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Venue Map</title>
+        <title>Concert Drive</title>
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom styles for jumbotron template -->
-    <link href="css/jumbotron-narrow.css" rel="stylesheet">
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!-- Custom styles for jumbotron template -->
+        <link href="css/jumbotron-narrow.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->    
     
-    
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/index.js"></script>
-    <script src="js/locationPrefs.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/index.js"></script>
+        <script src="js/locationPrefs.js"></script>
 
-    <!-- Google Map API Key AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU -->
-    <script type="text/javascript" src="http://www.google.com/jsapi?key=ABQIAAAAZBe7uHI90ESk2XAmWRL3RxR6u04U0tImA3bfwZ3-HKdEno7z2xRk2YE6OkudtBX5qy0vLrgbf1DUCg"></script>
+        <!-- Google Map API Key AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU -->
+        <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU"></script>
+        <script type="text/javascript">
+            google.load("jquery", '1.3');
+            google.load("maps", "2.x");
+        </script>
 
-    <script type="text/javascript">
-        google.load("jquery", '1.3');
-        google.load("maps", "2.x");
-    </script>
-    <script type="text/javascript" charset="utf-8">
-        $(document).ready(function(){
-            var map = new GMap2($("#map").get(0));
-            var burnsvilleMN = new GLatLng(44.797916,-93.278046);
-            map.setCenter(burnsvilleMN, 8);
+        <script type="text/javascript" charset="utf-8">
+            $(document).ready(function(){
+                var map = new GMap2($("#map").get(0));
+                var berlinDE = new GLatLng(52.524370,13.410530);
+                map.setCenter(berlinDE, 8);
 
-            // setup 10 random points
-            var bounds = map.getBounds();
-            var southWest = bounds.getSouthWest();
-            var northEast = bounds.getNorthEast();
-            var lngSpan = northEast.lng() - southWest.lng();
-            var latSpan = northEast.lat() - southWest.lat();
-            var markers = [];
-            for (var i = 0; i < 10; i++) {
-                var point = new GLatLng(southWest.lat() + latSpan * Math.random(),
+                // setup 10 random points
+                var bounds = map.getBounds();
+                var southWest = bounds.getSouthWest();
+                var northEast = bounds.getNorthEast();
+                var lngSpan = northEast.lng() - southWest.lng();
+                var latSpan = northEast.lat() - southWest.lat();
+                var markers = [];
+                for (var i = 0; i < 10; i++) {
+                    var point = new GLatLng(southWest.lat() + latSpan * Math.random(),
                     southWest.lng() + lngSpan * Math.random());
-                marker = new GMarker(point);
-                map.addOverlay(marker);
-                markers[i] = marker;
-            }
+                    marker = new GMarker(point);
+                    map.addOverlay(marker);
+                    markers[i] = marker;
+                }
 
-            $(markers).each(function(i,marker){
-                $("<li />")
-                    .html("Point "+i)
-                    .click(function(){
+                $(markers).each(function(i,marker){
+                    $("<li />")
+                        .html("Point "+i)
+                        .click(function(){
                         displayPoint(marker, i);
                     })
                     .appendTo("#list");
 
-                GEvent.addListener(marker, "click", function(){
-                    displayPoint(marker, i);
+                    GEvent.addListener(marker, "click", function(){
+                        displayPoint(marker, i);
                 });
             });
 
@@ -71,108 +70,98 @@
             function displayPoint(marker, index){
                 $("#message").hide();
 
-                var moveEnd = GEvent.addListener(map, "moveend", function(){
-                    var markerOffset = map.fromLatLngToDivPixel(marker.getLatLng());
-                    $("#message")
-                        .fadeIn()
-                        .css({ top:markerOffset.y, left:markerOffset.x });
+                    var moveEnd = GEvent.addListener(map, "moveend", function(){
+                        var markerOffset = map.fromLatLngToDivPixel(marker.getLatLng());
+                        $("#message")
+                            .fadeIn()
+                            .css({ top:markerOffset.y, left:markerOffset.x });
 
-                    GEvent.removeListener(moveEnd);
-                });
-                map.panTo(marker.getLatLng());
+                        GEvent.removeListener(moveEnd);
+                    });
+                    map.panTo(marker.getLatLng());
+                }
+            });
+        </script>
+        <style type="text/css" media="screen">
+            #map { 
+                /* float:left; */
+                /* width:500px; */ 
+                height:500px; 
             }
-        });
-    </script>
-    <style type="text/css" media="screen">
-        #map { 
-            /* float:left; */
-            width:500px; 
-            height:500px; 
-        }
-        #message { 
-            position:absolute; 
-            padding:10px; 
-            background:#555; 
-            color:#fff; 
-            width:75px; 
-        }
-        #list { 
-            /* float:left; */
-            width:200px; 
-            background:#eee; 
-            list-style:none; 
-            padding:0; 
-        }
-        #list li { 
-            padding:10px; 
-        }
-        #list li:hover { 
-            background:#555; 
-            color:#fff; 
-            cursor:pointer; 
-            cursor:hand; 
-        }
-    </style>
-</head>
-  <body>
-      
-      
-    <div id="map"></div>
-    <ul id="list"></ul>
-    <div id="message" style="display:none;">
-        Test text.
-    </div>
-   
-    <div class="container">
-      <div class="header clearfix">
-        <nav>
-          <ul class="nav nav-pills pull-right">
-            <li role="presentation" class="active"><a href="#">Home</a></li>
-            <li role="presentation"><a href="#">About</a></li>
-            <li role="presentation"><a href="#">Contact</a></li>
-          </ul>
-        </nav>
-        <h3 class="text-muted">VenueStream</h3>
-      </div>
+            #message { 
+                position:absolute; 
+                padding:10px; 
+                background:#555; 
+                color:#fff; 
+                width:75px; 
+            }
+            #list { 
+                /* float:left; */
+                width: 100%; 
+                list-style:none; 
+                padding:0; 
+            }
+            #list li { 
+                background: white; 
+                padding:10px; 
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            #list li:hover { 
+                background:#555; 
+                color:#fff; 
+                cursor:pointer; 
+                cursor:hand; 
+            }
+            .marketing {
+                background:#eee; 
+                padding: 12px 0 12px;
+            }
+            .jumbotron {
+                padding-top: 12px;
+            }
+            .footer {
+                padding-left: 0;
+            }
+        </style>
+    </head>
+    <body>  
+        <div class="container">
+            <div class="header clearfix">
+                <nav>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation" class="active"><a href="#">Home</a></li>
+                        <li role="presentation"><a href="#">About</a></li>
+                        <li role="presentation"><a href="#">Contact</a></li>
+                    </ul>
+                </nav>
+                <h3 class="text-muted">Concert Drive</h3>
+            </div>
 
-      <div class="jumbotron">
-        <h1>VenueStream</h1>       
-        
-      </div>
+            <div class="jumbotron">
+                <h1>Concert Drive</h1>       
+                <div id="map" class="col-xs-12"></div>
+                    <div id="message" style="display:none;">
+                        Test text.
+                    </div> 
+                <div class="clearfix"></div>
+            </div>
 
-      <div class="row marketing">
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+            <div class="row marketing">
+                <div class="col-xs-12">
+                    <ul id="list" class="col-xs-12"></ul>
+                    <div class="clearfix"></div>
+                </div>
+            </div> 
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
+            <footer class="footer">
+                <p>&copy; Concert Drive 2015</p>
+            </footer>
 
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
+        </div> <!-- /container -->
 
-        <div class="col-lg-6">
-          <h4>Subheading</h4>
-          <p>Donec id elit non mi porta gravida at eget metus. Maecenas faucibus mollis interdum.</p>
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <script src="js/ie10-viewport-bug-workaround.js"></script>
 
-          <h4>Subheading</h4>
-          <p>Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Cras mattis consectetur purus sit amet fermentum.</p>
-
-          <h4>Subheading</h4>
-          <p>Maecenas sed diam eget risus varius blandit sit amet non magna.</p>
-        </div>
-      </div>
-
-      <footer class="footer">
-        <p>&copy; Company 2014</p>
-      </footer>
-
-    </div> <!-- /container -->
-
-
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="js/ie10-viewport-bug-workaround.js"></script>
-
-  </body>
+    </body>
 </html>
