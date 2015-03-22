@@ -8,7 +8,7 @@ var current_song = "";
 var current_country = "US";
 
 // hardcode car "route" for demo
-var locations = ["Berlin,Germany","Munich,Germany","London,England"]
+var locations = ["Budapest,Hungary","Munich,Germany","London,England"]
 var location_pointer = 0;
 
 var event_recommendations = []; // store events from liked songs
@@ -92,7 +92,7 @@ function generatePlaylist() {
     }
 };
         
-repopulateEvents("Budapest,Hungary",1,generatePlaylist);
+repopulateEvents("Berlin,Germany",1,generatePlaylist);
 
 // STEP 3: ACCEPT AND INTERPRET USER FEEDBACK
     
@@ -154,8 +154,8 @@ $("#like-button").click(function() {
     $.post('http://api.what3words.com/position', data, function(response) {
         three = response.words;
         $.post('http://tts-api.com/tts.mp3?q='+three, function(response) {
-            audioObject = new Audio(response);
-            audioObject.play();
+            audioObject2 = new Audio(response);
+            audioObject2.play();
         })
         $("#concert_info").html("<p>"+current_event.venue.name+" | "+three+" | "+current_event.datetime+"</p>");
 });
