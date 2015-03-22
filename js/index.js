@@ -115,15 +115,17 @@ $("#refresh-map").click(function() {
     repopulateEvents(locations[location_pointer],1.5,generatePlaylist);
 });
 
+var audioObject = undefined;
+
 function nextTrack() {
     console.log("next track");
     if (event_queue.length > 0) {
         current_event = event_queue.shift();
         current_song = song_queue.shift();
         console.log(current_song);
-        // if (audioObject) {
-        //     audioObject.pause();
-        // }
+        if (audioObject) {
+            audioObject.pause();
+        }
         audioObject = new Audio(current_song);
         audioObject.pause();
         audioObject.play();
@@ -141,10 +143,12 @@ $("#pause-music").click(function() {
 $("#like-button").click(function() {
     console.log("like!");
     event_recommendations.push(current_event);
+    console.log(JSON.stringify(event_recommendations));
     nextTrack();
 });
 
 $("#skip-button").click(function() {
+    console.log("dislike!");
     nextTrack();
     // add genre to negative preferences - later
 });
