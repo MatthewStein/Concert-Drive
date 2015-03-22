@@ -1,0 +1,19 @@
+body{
+    font-family: 'Merriweather Sans', sans-serif;
+}
+.jumbotron{
+    border-radius: 20px;   
+}
+img{
+    border-radius: 20px;
+    border: solid 2px black;
+}
+button{
+    font-family: 'Merriweather Sans', sans-serif;
+    border: solid 2px black;
+    border-radius: 5px;
+}
+.btn{
+    border: solid 2px black;
+    border-radius: 5px;   
+}
