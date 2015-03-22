@@ -12,6 +12,7 @@
     <link href='http://fonts.googleapis.com/css?family=Radley:400italic' rel='stylesheet' type='text/css'>
     <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 
+     <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
     <!-- Custom styles for jumbotron template -->
     <link href="css/jumbotron-narrow.css" rel="stylesheet">
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -50,9 +51,8 @@
             height: 600px;
         }
         button#like-button {
-            position: absolute;
             top: 70px;
-            left: 100px;
+            left: 120px;
         }
         button#skip-button {
             position: absolute;
@@ -81,6 +81,72 @@
         p {
             font-size: 1.2em;
         }
+        .jumbotron {
+            padding: 3px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        .steering-wheel {
+            position: relative;
+        }
+        button#like-button {
+            background-color: green;
+            position: absolute;
+            top: 20%;
+            left: 20%;
+        }
+        button#skip-button {
+            background-color: red;
+            position: absolute;
+            top: 20%;
+            left: 68%;
+        }
+        button#refresh-map {
+            position: absolute;
+             top: 45%;
+            left: 42%;
+        }
+        button#play-music {
+            position: absolute;
+            top: 45%;
+            left: 22%;
+        }
+        button#pause-music {
+            position: absolute;
+            top: 45%;
+            left: 70%;
+        }
+        button {
+   border-top: 1px solid #96d1f8;
+   background: #65a9d7;
+   background: -webkit-gradient(linear, left top, left bottom, from(#3e779d), to(#65a9d7));
+   background: -webkit-linear-gradient(top, #3e779d, #65a9d7);
+   background: -moz-linear-gradient(top, #3e779d, #65a9d7);
+   background: -ms-linear-gradient(top, #3e779d, #65a9d7);
+   background: -o-linear-gradient(top, #3e779d, #65a9d7);
+   padding: 8.5px 17px;
+   -webkit-border-radius: 10px;
+   -moz-border-radius: 10px;
+   border-radius: 10px;
+   -webkit-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   -moz-box-shadow: rgba(0,0,0,1) 0 1px 0;
+   box-shadow: rgba(0,0,0,1) 0 1px 0;
+   text-shadow: rgba(0,0,0,.4) 0 1px 0;
+   color: #261b26;
+   font-size: 15px;
+   font-family: Helvetica, Arial, Sans-Serif;
+   text-decoration: none;
+   vertical-align: middle;
+   }
+button:hover {
+   border-top-color: #28597a;
+   background: #28597a;
+   color: #ccc;
+   }
+button:active {
+   border-top-color: #1b435e;
+   background: #1b435e;
+   }
     </style>  
   </head>
   <body>
