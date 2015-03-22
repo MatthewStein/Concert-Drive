@@ -19,23 +19,25 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
-    <script src="js/locationPrefs.js"></script>
   </head>
   <body>
 
-    <div id="car-controls">
     <button type="submit" class="btn btn-default btn-lg" id="like-button">
         <span class="glyphicon glyphicon-thumbs-up"></span>  
     </button>
-    <img id="wheel" src="img/steering-wheel.jpg">
     <button type="submit" class="btn btn-default btn-lg" id="skip-button">
-        <span class="glyphicon glyphicon-thumbs-down"></span>  
+        <span class="glyphicon glyphicon-thumbs-down"></span>
     </button>
-    </div>
 
-    <video controls="" autoplay="" name="media">
+    <button type="submit" id="refresh-map">Keep driving!</button>
+
+    <button type="submit" id="play-music">Play</button>
+    <button type="submit" id="pause-music">Pause</button>
+    <!-- <audio controls></audio> -->
+
+<!--     <video controls="" autoplay="" name="media">
             <source src="https://p.scdn.co/mp3-preview/d51bd2f858d022a860f0d906f4b18db7e7300e56" type="audio/mpeg">
-    </video>
+    </video> -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <script src="js/ie10-viewport-bug-workaround.js"></script>
