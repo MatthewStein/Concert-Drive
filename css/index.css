@@ -1,40 +1,7 @@
-#map { 
-    /* float:left; */
-    /* width:500px; */ 
-    height:300px; 
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
 }
-#message { 
-    position:absolute; 
-    padding:10px; 
-    background:#555; 
-    color:#fff; 
-    width:75px; 
-}
-#list { 
-    /* float:left; */
-    width: 100%; 
-    list-style:none; 
-    padding:0; 
-}
-#list li { 
-    background: white; 
-    padding:10px; 
-    margin-bottom: 15px;
-    width: 100%;
-}
-#list li:hover { 
-    background:#555; 
-    color:#fff; 
-    cursor:pointer; 
-    cursor:hand; 
-}
-.marketing {
-    background:#eee; 
-    padding: 12px 0 12px;
-}
-.jumbotron {
-    padding: 12px;
-}
-.footer {
-    padding-left: 0;
+th,td {
+    padding: 15px;
 }

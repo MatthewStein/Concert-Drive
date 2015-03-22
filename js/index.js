@@ -14,7 +14,7 @@ var location_pointer = 0;
 var event_recommendations = []; // store events from liked songs
     
 // STEP 1: GET UPCOMING EVENTS NEAR CURRENT LOCATION
-    
+
 function repopulateEvents(location, radius, callback) {
     $.getJSON("http://api.bandsintown.com/events/search.json?location="+location+"&radius="+radius+"&callback=?&app_id=concert_drive",
     function(data){
@@ -61,7 +61,6 @@ function repopulateEvents(location, radius, callback) {
     // - sort bands based on $$ (not now) or weighted genre preferences
     // - get top songs for each artist from Spotify API
     // - add snippets of songs to media player queue
-
 
 function generatePlaylist() {
     for (var i=0; i<event_queue.length; i++) {
@@ -143,8 +142,24 @@ $("#pause-music").click(function() {
 
 $("#like-button").click(function() {
     console.log("like!");
-    event_recommendations.push(current_event);
-    console.log(JSON.stringify(event_recommendations));
+    lat = current_event.venue.latitude;
+    lon = current_event.venue.longitude;
+
+    data = {
+    'key':      '1RXVDYSE',
+    'position': lat+","+lon
+    };
+
+    var three = "";
+    $.post('http://api.what3words.com/position', data, function(response) {
+        three = response.words;
+        $("#concert_info").html("<p>"+current_event.venue.name+"</p><p>"+three+"</p>");
+});
+
+    // $("#concert_info").html("<p>"+current_event.venue.name+"</p><p>"+three+"</p>");
+    // console.log(JSON.stringify(current_event.venue));
+    // event_recommendations.push(current_event);
+    // console.log(JSON.stringify(event_recommendations));
     nextTrack();
 });
 
