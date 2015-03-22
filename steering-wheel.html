@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>Car Simulation</title>
-
+    <link href='http://fonts.googleapis.com/css?family=Merriweather+Sans' rel='stylesheet' type='text/css'>
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/car-sim.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
 
     <!-- Custom styles for jumbotron template -->
     <link href="css/jumbotron-narrow.css" rel="stylesheet">
@@ -25,40 +25,49 @@
     <script src="js/index.js"></script>
       
     <style>
+        * { margin: 0; padding: 0; }
+        body { 
+          background-color: gray;
+          background: url(img/road.jpg) no-repeat center center fixed; 
+          -webkit-background-size: cover;
+          -moz-background-size: cover;
+          -o-background-size: cover;
+          background-size: cover;
+        }
         .jumbotron {
             padding: 3px;
             padding-top: 12px;
             padding-bottom: 12px;
+            background-color: transparent;
         }
         .steering-wheel {
             position: relative;
+            height: 600px;
         }
         button#like-button {
-            background-color: green;
             position: absolute;
-            top: 20%;
-            left: 20%;
+            top: 70px;
+            left: 100px;
         }
         button#skip-button {
-            background-color: red;
             position: absolute;
-            top: 20%;
-            left: 68%;
+            top: 70px;
+            left: 400px;
         }
         button#refresh-map {
             position: absolute;
-             top: 45%;
-            left: 42%;
+            top: 150px;
+            left: 240px;
         }
         button#play-music {
             position: absolute;
-            top: 45%;
-            left: 22%;
+            top: 130px;
+            left: 115px;
         }
         button#pause-music {
             position: absolute;
-            top: 45%;
-            left: 70%;
+            top: 130px;
+            left: 410px;
         }
         @media (min-width: 768px) { 
             .jumbotron {
@@ -71,22 +80,10 @@
   </head>
   <body>
 
-    <div class="container">
-        <div class="header clearfix">
-            <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation" class="active"><a href="#">Home</a></li>
-                    <li role="presentation"><a href="#">About</a></li>
-                    <li role="presentation"><a href="#">Contact</a></li>
-                </ul>
-            </nav>
-            <h3 class="text-muted">Concert Drive</h3>
-        </div>
-
         <div class="jumbotron">
             <h1>Concert Drive</h1>       
             <div class="steering-wheel col-xs-12">
-                <img src="img/steering-wheel.jpg" class="col-xs-12">           
+                <img id="wheel" src="img/steering-wheel.jpg" class="col-xs-12">           
             
                 <button type="submit" class="btn btn-default btn-lg" id="like-button">
                     <span class="glyphicon glyphicon-thumbs-up"></span>  
@@ -110,6 +107,8 @@
             <div class="clearfix"></div>
            
         </div>
+
+        <div id="concert_info"></div>
 
         <footer class="footer">
             <p>&copy; Concert Drive 2015</p>
