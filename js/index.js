@@ -93,7 +93,7 @@ function generatePlaylist() {
     }
 };
         
-repopulateEvents("Boston,MA",1,generatePlaylist);
+repopulateEvents("Budapest,Hungary",1,generatePlaylist);
 
 // STEP 3: ACCEPT AND INTERPRET USER FEEDBACK
     
@@ -112,6 +112,7 @@ repopulateEvents("Boston,MA",1,generatePlaylist);
 $("#refresh-map").click(function() {
     location_pointer += 1;
     event_queue = []; // clear past events
+    song_queue = [];
     repopulateEvents(locations[location_pointer],1.5,generatePlaylist);
 });
 
