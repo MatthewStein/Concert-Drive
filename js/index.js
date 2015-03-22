@@ -157,7 +157,7 @@ $("#like-button").click(function() {
             audioObject = new Audio(response);
             audioObject.play();
         })
-        $("#concert_info").html("<p>"+current_event.venue.name+"</p><p>"+three+"</p>");
+        $("#concert_info").html("<p>"+current_event.venue.name+" | "+three+" | "+current_event.datetime+"</p>");
 });
 
     // $("#concert_info").html("<p>"+current_event.venue.name+"</p><p>"+three+"</p>");
