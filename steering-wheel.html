@@ -23,6 +23,42 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/index.js"></script>
+      
+    <style>
+        .jumbotron {
+            padding: 3px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        .steering-wheel {
+            position: relative;
+        }
+        button#like-button {
+            position: absolute;
+            top: 70px;
+            left: 100px;
+        }
+        button#skip-button {
+            position: absolute;
+            top: 70px;
+            left: 400px;
+        }
+        button#refresh-map {
+            position: absolute;
+            top: 150px;
+            left: 240px;
+        }
+        button#play-music {
+            position: absolute;
+            top: 130px;
+            left: 115px;
+        }
+        button#pause-music {
+            position: absolute;
+            top: 130px;
+            left: 410px;
+        }
+    </style>  
   </head>
   <body>
 
@@ -40,27 +76,30 @@
 
         <div class="jumbotron">
             <h1>Concert Drive</h1>       
-            <div class="col-xs-12">
+            <div class="steering-wheel col-xs-12">
                 <img src="img/steering-wheel.jpg" class="col-xs-12">           
+            
+                <button type="submit" class="btn btn-default btn-lg" id="like-button">
+                    <span class="glyphicon glyphicon-thumbs-up"></span>  
+                </button>
+                <button type="submit" class="btn btn-default btn-lg" id="skip-button">
+                    <span class="glyphicon glyphicon-thumbs-down"></span>
+                </button>
+
+                <button type="submit" id="refresh-map">Keep driving!</button>
+
+                <button type="submit" id="play-music">Play</button>
+                <button type="submit" id="pause-music">Pause</button>
+                <!-- <audio controls></audio> -->
+
+                <!-- <video controls="" autoplay="" name="media">
+                        <source src="https://p.scdn.co/mp3-preview/d51bd2f858d022a860f0d906f4b18db7e7300e56" type="audio/mpeg">
+                </video> -->
+                
             </div>
             
-            <button type="submit" class="btn btn-default btn-lg" id="like-button">
-                <span class="glyphicon glyphicon-thumbs-up"></span>  
-            </button>
-            <button type="submit" class="btn btn-default btn-lg" id="skip-button">
-                <span class="glyphicon glyphicon-thumbs-down"></span>
-            </button>
-
-            <button type="submit" id="refresh-map">Keep driving!</button>
-
-            <button type="submit" id="play-music">Play</button>
-            <button type="submit" id="pause-music">Pause</button>
-            <!-- <audio controls></audio> -->
-
-        <!--     <video controls="" autoplay="" name="media">
-                    <source src="https://p.scdn.co/mp3-preview/d51bd2f858d022a860f0d906f4b18db7e7300e56" type="audio/mpeg">
-            </video> -->
-            
+            <div class="clearfix"></div>
+           
         </div>
 
         <footer class="footer">
