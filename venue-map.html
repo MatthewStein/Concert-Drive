@@ -8,8 +8,11 @@
         <title>Concert Drive</title>
 
         <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- Custom styles for jumbotron template -->
         <link href="css/jumbotron-narrow.css" rel="stylesheet">
-        <link href="css/index.css" rel="stylesheet">
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 
         <!--[if lt IE 9]>
             <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -19,6 +22,7 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/index.js"></script>
+        <script src="js/locationPrefs.js"></script>
 
         <!-- Google Map API Key AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU -->
         <script type="text/javascript" src="http://www.google.com/jsapi?key=AIzaSyC5MXLXQhuZjOdMsNXsl4BCwq0Bh_9omMU"></script>
@@ -27,10 +31,11 @@
             google.load("maps", "2.x");
         </script>
 
-        <script type="text/javascript">
+        <script type="text/javascript" charset="utf-8">
             $(document).ready(function(){
                 var map = new GMap2($("#map").get(0));
                 var berlinDE = new GLatLng(52.524370,13.410530);
+
                 map.setCenter(berlinDE, 14);
 
                 // setup 10 random points
@@ -74,11 +79,66 @@
                         .css({ top:markerOffset.y, left:markerOffset.x });
 
                     GEvent.removeListener(moveEnd);
+                    GEvent.addListener(marker, "click", function(){
+                        displayPoint(marker, i);
                 });
-                map.panTo(marker.getLatLng());
-            }
-        });
+            });
+            $("#message").appendTo(map.getPane(G_MAP_FLOAT_SHADOW_PANE));
+            function displayPoint(marker, index){
+                $("#message").hide();
+                    var moveEnd = GEvent.addListener(map, "moveend", function(){
+                        var markerOffset = map.fromLatLngToDivPixel(marker.getLatLng());
+                        $("#message")
+                            .fadeIn()
+                            .css({ top:markerOffset.y, left:markerOffset.x });
+                        GEvent.removeListener(moveEnd);
+                    });
+                    map.panTo(marker.getLatLng());
+                }
+            });
         </script>
+        <style type="text/css" media="screen">
+            #map { 
+                /* float:left; */
+                /* width:500px; */ 
+                height:500px; 
+            }
+            #message { 
+                position:absolute; 
+                padding:10px; 
+                background:#555; 
+                color:#fff; 
+                width:75px; 
+            }
+            #list { 
+                /* float:left; */
+                width: 100%; 
+                list-style:none; 
+                padding:0; 
+            }
+            #list li { 
+                background: white; 
+                padding:10px; 
+                margin-bottom: 15px;
+                width: 100%;
+            }
+            #list li:hover { 
+                background:#555; 
+                color:#fff; 
+                cursor:pointer; 
+                cursor:hand; 
+            }
+            .marketing {
+                background:#eee; 
+                padding: 12px 0 12px;
+            }
+            .jumbotron {
+                padding-top: 12px;
+            }
+            .footer {
+                padding-left: 0;
+            }
+        </style>
     </head>
     <body>  
         <div class="container">
@@ -93,8 +153,12 @@
                 <h3 class="text-muted">Concert Drive</h3>
             </div>
 
-            <div class="jumbotron">      
+            <div class="jumbotron">
+                <h1>Concert Drive</h1>       
                 <div id="map" class="col-xs-12"></div>
+                    <div id="message" style="display:none;">
+                        Test text.
+                    </div> 
                 <div class="clearfix"></div>
             </div>
 
