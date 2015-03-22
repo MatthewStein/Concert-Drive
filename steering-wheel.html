@@ -9,6 +9,8 @@
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Radley:400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for jumbotron template -->
     <link href="css/jumbotron-narrow.css" rel="stylesheet">
@@ -33,6 +35,9 @@
           -moz-background-size: cover;
           -o-background-size: cover;
           background-size: cover;
+        }
+        h1 {
+            font-family: 'Rock Salt', cursive;
         }
         .jumbotron {
             padding: 3px;
@@ -71,12 +76,20 @@
             top: 45%;
             left: 70%;
         }
+        #concert_info {
+            height: 50px;
+            width: auto;
+        }
+        p {
+            font-size: 1.2em;
+        }
     </style>  
   </head>
   <body>
 
         <div class="jumbotron">
-            <h1>Concert Drive</h1>       
+            <h1>Concert Drive</h1>    
+            <div id="concert_info"></div>   
             <div class="steering-wheel col-xs-12">
                 <img id="wheel" src="img/steering-wheel.jpg" class="col-xs-12">           
             
@@ -102,8 +115,6 @@
             <div class="clearfix"></div>
            
         </div>
-
-        <div id="concert_info"></div>
 
         <footer class="footer">
             <p>&copy; Concert Drive 2015</p>
