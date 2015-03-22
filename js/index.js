@@ -153,6 +153,10 @@ $("#like-button").click(function() {
     var three = "";
     $.post('http://api.what3words.com/position', data, function(response) {
         three = response.words;
+        $.post('http://tts-api.com/tts.mp3?q='+three, function(response) {
+            audioObject = new Audio(response);
+            audioObject.play();
+        })
         $("#concert_info").html("<p>"+current_event.venue.name+"</p><p>"+three+"</p>");
 });
 
